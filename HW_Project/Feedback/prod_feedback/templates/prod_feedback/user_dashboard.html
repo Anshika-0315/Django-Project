@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Feedback - Dashboard{% endblock %}
+
+{% block content %}
+    <!-- Navbar -->
+    <nav class="bg-blue-900 text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{% url 'prod_feedback:home' %}" class="text-2xl font-bold">Feedback</a>
+            <div class="space-x-4 flex items-center">
+                <a href="{% url 'prod_feedback:home' %}" class="hover:text-green-400">Home</a>
+                <a href="{% url 'prod_feedback:add_feedback' %}" class="hover:text-green-400">Rate Us</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'prod_feedback:dashboard' %}" class="hover:text-green-400">Dashboard</a>
+                    <form action="{% url 'logout' %}" method="post" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="hover:text-green-400 bg-transparent border-none p-0 text-white">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="hover:text-green-400">Login</a>
+                    <a href="{% url 'prod_feedback:user_register' %}" class="hover:text-green-400">Register</a>
+                {% endif %}
+                <a href="{% url 'admin:index' %}" class="hover:text-green-400">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Section -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Welcome, {{ user.name }}!</h2>
+            <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Your Dashboard</h3>
+                <p class="text-gray-700 mb-2"><strong>Email:</strong> {{ user.email }}</p>
+                <p class="text-gray-700 mb-4"><strong>Name:</strong> {{ user.name }}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto text-center">
+            <h3 class="text-2xl font-bold mb-4">Feedback</h3>
+            <p class="text-gray-300 mb-4">Your opinion matters.</p>
+            <div class="flex justify-center space-x-4 mb-4">
+                <a href="#" class="hover:text-green-400">Facebook</a>
+                <a href="#" class="hover:text-green-400">Twitter</a>
+                <a href="#" class="hover:text-green-400">Instagram</a>
+            </div>
+            <p class="text-gray-400 text-sm">© 2025 Feedback. All rights reserved.</p>
+        </div>
+    </footer>
+{% endblock %}

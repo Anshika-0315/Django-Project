@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Bookstore - Logged Out{% endblock %}
+
+{% block content %}
+    <!-- Navbar -->
+    <nav class="bg-blue-900 text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{% url 'prod_feedback:home' %}" class="text-2xl font-bold">Feedback</a>
+            <div class="space-x-4 flex items-center">
+                <a href="{% url 'prod_feedback:home' %}" class="hover:text-green-400">Home</a>
+                <a href="{% url 'prod_feedback:add_feedback' %}" class="hover:text-green-400">Rate Us</a>
+                {% if user.is_authenticated %}
+                    <form action="{% url 'logout' %}" method="post" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="hover:text-green-400 bg-transparent border-none p-0 text-white">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="hover:text-green-400">Login</a>
+                    <a href="{% url 'prod_feedback:user_register' %}" class="hover:text-green-400">Register</a>
+                {% endif %}
+                <a href="{% url 'admin:index' %}" class="hover:text-green-400">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Logged Out Section -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto max-w-lg text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Logged Out</h2>
+            <p class="text-lg text-gray-600 mb-6">You have been successfully logged out.</p>
+            <a href="{% url 'login' %}" class="inline-block bg-blue-900 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition duration-300">Log In Again</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto text-center">
+            <h3 class="text-2xl font-bold mb-4">Feedback</h3>
+            <p class="text-gray-300 mb-4">Your opinion matters.</p>
+            <div class="flex justify-center space-x-4 mb-4">
+                <a href="#" class="hover:text-green-400">Facebook</a>
+                <a href="#" class="hover:text-green-400">Twitter</a>
+                <a href="#" class="hover:text-green-400">Instagram</a>
+            </div>
+            <p class="text-gray-400 text-sm">© 2025 Feedback. All rights reserved.</p>
+        </div>
+    </footer>
+{% endblock %}

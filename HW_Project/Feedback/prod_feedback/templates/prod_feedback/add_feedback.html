@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Add Feedback</title>
+</head>
+<body>
+    <div class="container">
+    <h1 class="display-3 text-center text-success">Feedback</h1>
+    <hr>
+    <form method="post" class="row g-3">
+        {% csrf_token %}
+        <div class="col-md-6">
+            <label for="inputName" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" id="inputName">
+          </div>
+          <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" id="inputEmail4">
+          </div>
+        <div class="col-md-6">
+            <label for="inputNumber" class="form-label">Mobile Number</label>
+            <input type="tel" name="mobile" class="form-control" id="inputNumber" pattern="[0-9]{10}" maxlength="10">
+        </div>
+        <div class="col-md-4">
+            <label for="inputRating" class="form-label">Rate Us</label>
+            <select id="inputRating" class="form-select" name="rating">
+              <option selected>Choose...</option>
+              <option value="5">5-Star</option>
+              <option value="4">4-Star</option>
+              <option value="3">3-Star</option>
+              <option value="2">2-Star</option>
+              <option value="1">1-Star</option>
+            </select>
+        </div>
+        <div class="col-12">
+          <label for="inputMessage" class="form-label">Message</label>
+          <textarea type="text" name="message" class="form-control" id="inputMessage" placeholder="Give your suggestions..."></textarea>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+      </div>
+</body>
+</html>
